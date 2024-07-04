@@ -1,0 +1,304 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="MainFunctionality" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_StatsWebsite" Type="InArgument(x:String)" />
+    <x:Property Name="in_PathToTeamNames" Type="InArgument(x:String)" />
+    <x:Property Name="in_DT_OutputData" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="in_Fumbles" Type="OutArgument(x:String)" />
+    <x:Property Name="in_RushingTDs" Type="OutArgument(x:String)" />
+    <x:Property Name="in_RushingYards" Type="OutArgument(x:String)" />
+    <x:Property Name="in_isFirstRun" Type="InOutArgument(x:Boolean)" />
+    <x:Property Name="in_Str_TeamNames" Type="InOutArgument(x:String)" />
+    <x:Property Name="in_List_TeamNames" Type="InOutArgument(scg:List(x:String))" />
+    <x:Property Name="in_DT_NFLTeamNames" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_PlayerName" Type="InOutArgument(x:String)" />
+    <x:Property Name="in_Completions" Type="OutArgument(x:String)" />
+    <x:Property Name="in_RushAttempts" Type="OutArgument(x:String)" />
+    <x:Property Name="in_Sacks" Type="OutArgument(x:String)" />
+    <x:Property Name="in_Interceptions" Type="OutArgument(x:String)" />
+    <x:Property Name="in_PassingTDs" Type="OutArgument(x:String)" />
+    <x:Property Name="in_PassAttempts" Type="OutArgument(x:String)" />
+    <x:Property Name="in_AvgPassYards" Type="OutArgument(x:String)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>1127,2873</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.ExtractData</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>System.Numerics</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="726,2808" sap2010:WorkflowViewState.IdRef="Sequence_25">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="MainFunctionality" sap:VirtualizedContainerService.HintSize="684,2743" sap2010:WorkflowViewState.IdRef="Sequence_24">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[in_DT_NFLTeamNames]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="622,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Sheet1" WorkbookPath="[in_PathToTeamNames]" />
+      <Assign sap:VirtualizedContainerService.HintSize="622,114" sap2010:WorkflowViewState.IdRef="Assign_31">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Boolean">[in_isFirstRun]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="622,114" sap2010:WorkflowViewState.IdRef="Assign_11">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:List(x:String)">[in_List_TeamNames]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:List(x:String)">[(From r in in_DT_NFLTeamNames Select Convert.ToString(r("Team Name"))).tolist()]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="622,114" sap2010:WorkflowViewState.IdRef="Assign_12">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[in_Str_TeamNames]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[String.Join(",", in_List_TeamNames)]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="622,114" sap2010:WorkflowViewState.IdRef="Assign_13">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[in_Str_TeamNames]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[in_Str_TeamNames.Replace(" ", "-")]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each Team" sap:VirtualizedContainerService.HintSize="622,2056" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[in_List_TeamNames]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="x:String">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:String" Name="Team" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="588,1919" sap2010:WorkflowViewState.IdRef="Sequence_9">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="526,114" sap2010:WorkflowViewState.IdRef="Assign_15">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[Team]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[Team.Replace(" ", "-")]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Browser Chrome: Arizona Cardinals 2023 Player Roster | NFL.com" sap:VirtualizedContainerService.HintSize="526,1717" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" ScopeGuid="403c5c37-08eb-4178-b854-76af2ccb0444" Version="V2">
+                <uix:NApplicationCard.Body>
+                  <ActivityAction x:TypeArguments="x:Object">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="492,1477" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="sd:DataTable" Name="DT_ExtractedPlayerData" />
+                        <Variable x:TypeArguments="scg:List(sd:DataRow)" Name="List_DR_QbData" />
+                        <Variable x:TypeArguments="x:String" Name="FormattedPlayerName" />
+                        <Variable x:TypeArguments="scg:List(x:String)" Name="List_QB_Names" />
+                        <Variable x:TypeArguments="scg:List(sd:DataRow)" Name="List_Players" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[DT_ExtractedPlayerData]" DisplayName="Extract Table Data" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Table' AddCvHeader='true' IsScrollEnabled='false'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Player' ReferenceIdx='0' Name='Player'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Player Src' ReferenceIdx='1' Name='Player Src'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Player Url' ReferenceIdx='2' Name='Player Url'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='No' ReferenceIdx='3' Name='No'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Pos' ReferenceIdx='4' Name='Pos'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Status' ReferenceIdx='5' Name='Status'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Height' ReferenceIdx='6' Name='Height'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Weight' ReferenceIdx='7' Name='Weight'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Experience' ReferenceIdx='8' Name='Experience'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='College' ReferenceIdx='9' Name='College'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract-table get_columns_name='1' get_empty_columns='1' columns_name_source='Longest'&gt;&lt;column name='Player' attr='fulltext' name2='Player Src' attr2='src' name3='Player Url' attr3='href' /&gt;&lt;column name='No' attr='fulltext' /&gt;&lt;column name='Pos' attr='fulltext' /&gt;&lt;column name='Status' attr='fulltext' /&gt;&lt;column name='Height' attr='fulltext' /&gt;&lt;column name='Weight' attr='fulltext' /&gt;&lt;column name='Experience' attr='fulltext' /&gt;&lt;column name='College' attr='fulltext' /&gt;&lt;/extract-table&gt;" sap:VirtualizedContainerService.HintSize="450,189" sap2010:WorkflowViewState.IdRef="NExtractData_3" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="403c5c37-08eb-4178-b854-76af2ccb0444" Version="V3">
+                        <uix:NExtractData.Target>
+                          <uix:TargetAnchorable DesignTimeRectangle="179, 475, 1560, 8703" DesignTimeScaleFactor="1.25" FullSelectorArgument="&lt;webctrl tag='TABLE' /&gt;" Guid="b8122fdb-46f6-404b-ae97-786cd573740e" InformativeScreenshot="ffb20374559da9466efcc76e2ee51a64.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Arizona Cardinals 2023 Player Roster | NFL.com' /&gt;" SearchSteps="Selector" Version="V3" Visibility="Interactive" />
+                        </uix:NExtractData.Target>
+                      </uix:NExtractData>
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,175" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;After extract all player name data&quot;]" />
+                      <ui:Comment sap2010:Annotation.AnnotationText="" sap:VirtualizedContainerService.HintSize="450,253" sap2010:WorkflowViewState.IdRef="Comment_2" Text="Need to determine &#xD;&#xA;&#xD;&#xA;- What position they are (QB, RB, WR, TE)&#xD;&#xA;&#xD;&#xA;- How many games played do they have (&gt; 1)&#xD;&#xA;&#xD;&#xA;- If they're a rookie, we want them no matter what (exp = R)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:Comment>
+                      <Assign sap:VirtualizedContainerService.HintSize="450,114" sap2010:WorkflowViewState.IdRef="Assign_32">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="scg:List(sd:DataRow)">[List_Players]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="scg:List(sd:DataRow)">[(From r in DT_ExtractedPlayerData Where Convert.ToString(r(4)) = "QB" OR Convert.ToString(r(4)) = "WR" OR Convert.ToString(r(4)) = "RB" OR Convert.ToString(r(4)) = "TE" Select r).toList()]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="{x:Null}" DisplayName="For Each currentDataRow" sap:VirtualizedContainerService.HintSize="450,451" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[List_Players]">
+                        <ui:ForEach.Body>
+                          <ActivityAction x:TypeArguments="sd:DataRow">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="currentDataRow" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,305" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="354,217" sap2010:WorkflowViewState.IdRef="AddQueueItem_3" Priority="Normal" QueueType="NFLStats">
+                                <ui:AddQueueItem.ItemInformation>
+                                  <InArgument x:TypeArguments="x:String" x:Key="Team">[Team]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="Position">[currentDataRow.ItemArray(4).ToString]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="Height">[currentDataRow.ItemArray(6).ToString]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="Weight">[currentDataRow.ItemArray(7).ToString]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="Experience">[currentDataRow.ItemArray(8).ToString]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="College">[currentDataRow.ItemArray(9).ToString]</InArgument>
+                                </ui:AddQueueItem.ItemInformation>
+                              </ui:AddQueueItem>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEach.Body>
+                      </ui:ForEach>
+                      <ui:Comment sap2010:Annotation.AnnotationText="Exception Cases : &#xA;&#xA;1) People with punctuations in their name, specifcially . , ---- if a name contains these then we need to play a - at those indexes&#xA;&#xA;2) If there's already a - in the name, keep the dash and follow the main rule&#xA;" sap:VirtualizedContainerService.HintSize="450,228" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Need to place a - between each name">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:Comment>
+                    </Sequence>
+                  </ActivityAction>
+                </uix:NApplicationCard.Body>
+                <uix:NApplicationCard.TargetApp>
+                  <uix:TargetApp Area="-9, -9, 1938, 1158" BrowserType="Chrome" IconBase64="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" InformativeScreenshot="4996e252fde765f221f1be44a37436da.jpg" Selector="&lt;html app='chrome.exe' title='Arizona Cardinals 2023 Player Roster | NFL.com' /&gt;" Title="Arizona Cardinals 2023 Player Roster | NFL.com" Url="[String.Format(in_StatsWebsite, Team)]" />
+                </uix:NApplicationCard.TargetApp>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NApplicationCard>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:ForEach>
+    </Sequence>
+  </Sequence>
+</Activity>
